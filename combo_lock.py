@@ -7,6 +7,12 @@ I can use the hash function (a builtin) to map an object to a number. I am think
 I could implement something like the code below. My implementation of these security 
 features should not break any of Land's testing code and vice versa.
 
+Think of at least two different strategies to try opening it. Create 1000 locks
+and try the two different strategies. Would this be an efficient way to try a
+really large number of locks? How many attempts would you expect it to take 
+using different strategies? Create plots that show the distribution of how 
+many attempts it takes to open the locks with each strategy.
+
 def open_lock(input):
 return hash(str(input)+"you'll never find it Land!") == -7068180340459975452
 
@@ -39,10 +45,10 @@ class ComboLock(object):
     
     def clear(self):
         '''
-        clears the lock code and resets the lock
+        clears the user guess code
         '''
         self.user_entered = ''
-        print('code has been reset')
+        print('your guess has been reset')
 
     def __create_code(self):
         '''
@@ -93,7 +99,11 @@ class ComboLock(object):
             return False
     
     def __repr__(self):
-        return f'lock instance with {self.digits} digits in code'
+        return f'''
+        lock instance with {self.digits} digit(s) in code
+        use the enter() method to enter digits and open() to try and open the lock.
+        check_code() lets you check your guess, and clear() clears it.\n
+        '''
 
 
 if __name__ == '__main__':
@@ -112,6 +122,14 @@ if __name__ == '__main__':
     # # open lock
     # lock.open()
 
-
-
-
+    # make lock of 1 digit
+    # blunt force crack it
+    # digits = 1
+    # lock = ComboLock(digits)
+    # for i in range(10 ** digits):
+    #     lock.clear()
+    #     lock.enter(i)
+    #     if lock.open():
+    #         print(f'the correct guess was {i}')
+    #         break
+    pass
